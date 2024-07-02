@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<div class="card">
+  <div class="card-header"><strong>
+    	Servicio {{ servicio_unico.id }} </strong>
+  </div>
+  <div class="card-body">
+
+<p class="card-text">
+    <strong>ID: </strong>{{ servicio_unico.id }}</p>
+
+<p class="card-text">
+    <strong>Nombre de Servicio: </strong>{{ servicio_unico.nombre_servicio }}</p>
+
+  </div>
+</div>
+
+<br/><br/>
+<a href="{% url 'services' %}" class="btn btn-secondary">Atrás</a>
+
+<a href="{% url 'delete_service' servicio_unico.id %}" class="btn btn-danger">Eliminar</a>
+
+<a href="{% url 'update_service' servicio_unico.id %}" class="btn btn-secondary">Actualizar Servicio</a>
+
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+
+<!-- 2 formas de crear forms, se puede usar forms.py(se hará en el registrar Usuarios, o sino hacerlo a mano, que se hará ahora para Login)-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+
+{% if user.is_authenticated %} <!-- Si el usuario está autenticado, hacer lo que está antes de else.. -->
+
+<h1>Hello World</h1>
+
+{%else%}  <!--Si no está autenticado, forzar el login-->
+
+<h1>Login</h1>
+<br/>
+<form method="POST" action= "{% url 'home' %}">
+    {% csrf_token %}  <!-- Cross site request forgery token, permite que el token no sea hackeado. -->
+        <div class="mb-3">
+          <input type="text" class="form-control" name="username", placeholder="Nombre de Usuario" required> <!-- Required obliga a llenar el campo antes de la acción, Bootstrap se encarga de ello incialmente pero en Front tendremos que configurarlo nosotros. -->
+        </div> <br/>
+        <div class="mb-3">
+          <input type="password" class="form-control" name="password", placeholder="Contraseña" required>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-secondary">Login</button>
+</form>
+
+</div>
+
+{% endif %}
+{% endblock %}

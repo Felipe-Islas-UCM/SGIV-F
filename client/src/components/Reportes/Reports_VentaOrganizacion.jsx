@@ -114,7 +114,7 @@ export function Reports_VentaOrganizacion() {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/reports" size="large">
+        <Button variant="contained" component={Link} to="/admin/reports" size="large">
           Volver a Informes
         </Button>
       </Box>

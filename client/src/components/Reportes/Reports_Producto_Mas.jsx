@@ -184,7 +184,7 @@ export function Reports_Producto_Mas() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" component={Link} to="/reports" size="large">
+      <Button variant="contained" component={Link} to="/admin/reports" size="large">
       Volver
       </Button>
     </div>

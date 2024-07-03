@@ -1,9 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, Button, Typography } from '@mui/material';
 
 export function Reports() {
-    return (
+    const location = useLocation();
+    const path = location.pathname;
+    
+    return (    
       <Box p={4}>
         <Typography variant="h4" gutterBottom>
           Informes Generales
@@ -13,7 +16,7 @@ export function Reports() {
           <Typography variant="h5" gutterBottom>
             Informe de Ventas
           </Typography>
-          <Button variant="contained" component={Link} to="/reports/venta">
+          <Button variant="contained" component={Link} to={`${path}/venta`}>
             Ir a Informe de Ventas
           </Button>
         </Box>
@@ -22,7 +25,7 @@ export function Reports() {
           <Typography variant="h5" gutterBottom>
             Informe de Stock
           </Typography>
-          <Button variant="contained" component={Link} to="/reports/stock">
+          <Button variant="contained" component={Link} to={`${path}/stock`}>
             Ir a Informe de Inventario 
           </Button>
         </Box>
@@ -31,7 +34,7 @@ export function Reports() {
           <Typography variant="h5" gutterBottom>
             Informe Ventas por Organizaciones
           </Typography>
-          <Button variant="contained" component={Link} to="/reports/venta_organizacion">
+          <Button variant="contained" component={Link} to={`${path}/venta_organizacion`}>
             Ir a Informe de Ventas por Organizaciones
           </Button>
         </Box>
@@ -40,7 +43,7 @@ export function Reports() {
           <Typography variant="h5" gutterBottom>
           Informe de Ventas por Servicios
           </Typography>
-          <Button variant="contained" component={Link} to="/reports/venta_servicio">
+          <Button variant="contained" component={Link} to={`${path}/venta_servicio`}>
             Ir a Informe de Ventas por Servicios
           </Button>
         </Box>
@@ -49,10 +52,10 @@ export function Reports() {
           <Typography variant="h5" gutterBottom>
           Producto Más Vendido
           </Typography>
-          <Button variant="contained" component={Link} to="/reports/producto_mas">
+          <Button variant="contained" component={Link} to={`${path}/producto_mas`}>
             Ir a Informe de Producto Más Vendido
           </Button>
         </Box>
       </Box>
     );
-  }
+}

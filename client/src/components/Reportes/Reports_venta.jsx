@@ -121,7 +121,7 @@ export function Reports_venta() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" component={Link} to="/reports" size="large">
+      <Button variant="contained" component={Link} to="/admin/reports" size="large">
           Volver
         </Button>
     </div>

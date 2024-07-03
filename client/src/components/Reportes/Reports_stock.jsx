@@ -61,7 +61,7 @@ export function Reports_stock() {
   return (
     <div>
       <h1>Informe de Stock</h1>
-      <Button variant="contained" component={Link} to="/reports" size="large">
+      <Button variant="contained" component={Link} to="/admin/reports" size="large">
           Volver
         </Button>
       {productos.length > 0 && (

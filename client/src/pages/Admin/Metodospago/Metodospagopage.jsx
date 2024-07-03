@@ -22,7 +22,7 @@ export function MetodospagoPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/metodospago-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/metodospago-create" size="large" startIcon={<AddCircleIcon />}>
             Nuevo método pago
         </Button>
         </Box>
@@ -42,7 +42,7 @@ export function MetodospagoPage() {
                             <TableCell>{metodopago.id}</TableCell>
                             <TableCell>{metodopago.nombre_metodo_pago}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/metodospago/'+metodopago.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/metodospago/'+metodopago.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

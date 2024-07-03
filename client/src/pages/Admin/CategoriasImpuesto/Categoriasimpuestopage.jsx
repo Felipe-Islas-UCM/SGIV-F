@@ -22,7 +22,7 @@ export function CategoriasimpuestoPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/categoriasimpuesto-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/categoriasimpuesto-create" size="large" startIcon={<AddCircleIcon />}>
             Nueva categoria impuesto
         </Button>
         </Box>
@@ -42,7 +42,7 @@ export function CategoriasimpuestoPage() {
                             <TableCell>{categoriaimpuesto.id}</TableCell>
                             <TableCell>{categoriaimpuesto.nombre_categoria_impuesto}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/categoriasimpuesto/'+categoriaimpuesto.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/categoriasimpuesto/'+categoriaimpuesto.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

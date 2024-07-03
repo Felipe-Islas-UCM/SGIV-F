@@ -22,7 +22,7 @@ export function ServiciosPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/servicios-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/servicios-create" size="large" startIcon={<AddCircleIcon />}>
             Nuevo servicio
         </Button>
         </Box>
@@ -42,7 +42,7 @@ export function ServiciosPage() {
                             <TableCell>{servicio.id}</TableCell>
                             <TableCell>{servicio.nombre_servicio}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/servicios/'+servicio.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/servicios/'+servicio.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

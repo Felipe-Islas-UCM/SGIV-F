@@ -22,7 +22,7 @@ export function CategoriasproductoPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/categoriasproducto-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/categoriasproducto-create" size="large" startIcon={<AddCircleIcon />}>
             Nueva categoria producto
         </Button>
         </Box>
@@ -42,7 +42,7 @@ export function CategoriasproductoPage() {
                             <TableCell>{categoriaproducto.id}</TableCell>
                             <TableCell>{categoriaproducto.nombre_categoria_producto}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/categoriasproducto/'+categoriaproducto.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/categoriasproducto/'+categoriaproducto.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

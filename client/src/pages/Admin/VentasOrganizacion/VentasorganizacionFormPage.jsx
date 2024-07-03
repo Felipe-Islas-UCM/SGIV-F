@@ -136,7 +136,7 @@ export function VentasorgFormPage() {
 
                     {/* BOTÓN ATRÁS */}
                     <Box sx={{ display: "flex", marginBottom: '40px' }}>
-                        <Button variant='contained' color="warning" component={Link} to={'/ventasorg/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
+                        <Button variant='contained' color="warning" component={Link} to={'/admin/ventasorg/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
                             Atrás
                         </Button>
                     </Box>
@@ -201,7 +201,7 @@ export function VentasorgFormPage() {
                                             color: "#fff"
                                         }
                                     })
-                                    navigate("/ventasorg")
+                                    navigate("/admin/ventasorg")
                                 }
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>

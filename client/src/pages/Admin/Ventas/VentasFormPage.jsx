@@ -59,7 +59,7 @@ export function VentasFormPage() {
                     },
                 });
             }
-            navigate('/ventas');
+            navigate('/admin/ventas');
         } catch (error) {
             console.error('Error al procesar el formulario:', error);
             setError(error); // Almacenamos el error en el estado local
@@ -145,7 +145,7 @@ export function VentasFormPage() {
 
                     {/* BOTÓN ATRÁS */}
                     <Box sx={{ display: "flex", marginBottom: '40px' }}>
-                        <Button variant='contained' color="warning" component={Link} to={'/ventas/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
+                        <Button variant='contained' color="warning" component={Link} to={'/admin/ventas/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
                             Atrás
                         </Button>
                     </Box>
@@ -208,7 +208,7 @@ export function VentasFormPage() {
                                             color: "#fff"
                                         }
                                     })
-                                    navigate("/ventas")
+                                    navigate("/admin/ventas")
                                 }
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>

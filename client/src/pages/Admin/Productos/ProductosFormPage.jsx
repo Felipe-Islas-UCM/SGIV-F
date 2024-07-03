@@ -95,7 +95,7 @@ export function ProductosFormPage() {
                     },
                 });
             }
-            navigate('/productos');
+            navigate('/admin/productos');
         } catch (Axios_error) {
             //console.error('Error al procesar el formulario:', Axios_error);
             setAxiosError(Axios_error); // Almacenamos el error en el estado local
@@ -204,7 +204,7 @@ export function ProductosFormPage() {
 
                     {/* BOTÓN ATRÁS */}
                     <Box sx={{ display: "flex", marginBottom: '40px' }}>
-                        <Button variant='contained' color="warning" component={Link} to={'/productos/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
+                        <Button variant='contained' color="warning" component={Link} to={'/admin/productos/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
                             Atrás
                         </Button>
                     </Box>
@@ -328,7 +328,7 @@ export function ProductosFormPage() {
                                             color: "#fff"
                                         }
                                     })
-                                    navigate("/productos")
+                                    navigate("/admin/productos")
                                 }
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>

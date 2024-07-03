@@ -22,7 +22,7 @@ export function ItemsventaPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/itemsventa-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/itemsventa-create" size="large" startIcon={<AddCircleIcon />}>
             Nuevo Item venta
         </Button>
         </Box>
@@ -50,7 +50,7 @@ export function ItemsventaPage() {
                             <TableCell>{itemventa.fk_cod_venta}</TableCell>
                             <TableCell>{itemventa.producto.nombre_producto}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/itemsventa/'+itemventa.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/itemsventa/'+itemventa.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

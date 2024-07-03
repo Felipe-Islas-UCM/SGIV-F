@@ -48,7 +48,7 @@ export function ServiciosFormPage() {
                     },
                 });
             }
-            navigate('/servicios');
+            navigate('/admin/servicios');
         } catch (error) {
             console.error('Error al procesar el formulario:', error);
             setError(error); // Almacenamos el error en el estado local
@@ -94,7 +94,7 @@ export function ServiciosFormPage() {
 
 
                     <Box sx={{ display: "flex", marginBottom: '40px' }}>
-                        <Button variant='contained' color="warning" component={Link}  to={'/servicios/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
+                        <Button variant='contained' color="warning" component={Link}  to={'/admin/servicios/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
                             Atrás
                         </Button>
                     </Box>
@@ -125,7 +125,7 @@ export function ServiciosFormPage() {
                                             color: "#fff"
                                         }
                                     })
-                                    navigate("/servicios")
+                                    navigate("/admin/servicios")
                                 }
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>

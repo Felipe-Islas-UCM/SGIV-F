@@ -22,7 +22,7 @@ export function UsuariosPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/usuarios-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/usuarios-create" size="large" startIcon={<AddCircleIcon />}>
             Nuevo usuario
         </Button>
         </Box>
@@ -46,7 +46,7 @@ export function UsuariosPage() {
                             <TableCell>{usuario.contrasena_usuario}</TableCell>
                             <TableCell>{usuario.tipo_usuario.nombre_tipo_usuario}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/usuarios/'+usuario.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/usuarios/'+usuario.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

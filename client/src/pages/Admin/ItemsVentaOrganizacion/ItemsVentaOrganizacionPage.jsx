@@ -22,7 +22,7 @@ export function ItemsVentaOrganizacionPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/itemsventaorg-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/itemsventaorg-create" size="large" startIcon={<AddCircleIcon />}>
             Nueva Item de Venta Org.
         </Button>
         </Box>
@@ -50,7 +50,7 @@ export function ItemsVentaOrganizacionPage() {
                             <TableCell>{itemventaorg.cantidad_vendida}</TableCell>
                             <TableCell>{itemventaorg.importe_item_venta_organizacion}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/itemsventaorg/'+itemventaorg.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/itemsventaorg/'+itemventaorg.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

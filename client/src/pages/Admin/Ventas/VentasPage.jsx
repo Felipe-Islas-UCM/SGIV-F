@@ -22,7 +22,7 @@ export function VentasPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/ventas-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/ventas-create" size="large" startIcon={<AddCircleIcon />}>
             Nueva venta
         </Button>
         </Box>
@@ -50,7 +50,7 @@ export function VentasPage() {
                             <TableCell>{venta.metodo_pago.nombre_metodo_pago}</TableCell>
                             <TableCell>{venta.importe}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/ventas/'+venta.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/ventas/'+venta.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

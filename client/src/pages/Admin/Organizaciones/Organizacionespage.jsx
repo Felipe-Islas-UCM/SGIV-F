@@ -22,7 +22,7 @@ export function OrganizacionesPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/organizaciones-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/organizaciones-create" size="large" startIcon={<AddCircleIcon />}>
             Nueva organización
         </Button>
         </Box>
@@ -42,7 +42,7 @@ export function OrganizacionesPage() {
                             <TableCell>{organizacion.id}</TableCell>
                             <TableCell>{organizacion.nombre_organizacion}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/organizaciones/'+organizacion.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/organizaciones/'+organizacion.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

@@ -49,7 +49,7 @@ export function CategoriasimpuestoFormPage() {
                     },
                 });
             }
-            navigate('/categoriasimpuesto');
+            navigate('/admin/categoriasimpuesto');
         } catch (error) {
             console.error('Error al procesar el formulario:', error);
             setError(error); // Almacenamos el error en el estado local
@@ -101,7 +101,7 @@ export function CategoriasimpuestoFormPage() {
 
                     {/* BOTÓN ATRÁS */}
                     <Box sx={{ display: "flex", marginBottom: '40px' }}>
-                        <Button variant='contained' color="warning" component={Link} to={'/categoriasimpuesto/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
+                        <Button variant='contained' color="warning" component={Link} to={'/admin/categoriasimpuesto/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
                             Atrás
                         </Button>
                     </Box>
@@ -139,7 +139,7 @@ export function CategoriasimpuestoFormPage() {
                                             color: "#fff"
                                         }
                                     })
-                                    navigate("/categoriasimpuesto")
+                                    navigate("/admin/categoriasimpuesto")
                                 }
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>

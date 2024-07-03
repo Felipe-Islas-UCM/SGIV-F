@@ -22,7 +22,7 @@ export function ProveedoresPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/proveedores-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/proveedores-create" size="large" startIcon={<AddCircleIcon />}>
             Nuevo proveedor
         </Button>
         </Box>
@@ -44,7 +44,7 @@ export function ProveedoresPage() {
                             <TableCell>{proveedor.nombre_empresa}</TableCell>
                             <TableCell>{proveedor.rut_proveedor}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/proveedores/'+proveedor.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/proveedores/'+proveedor.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

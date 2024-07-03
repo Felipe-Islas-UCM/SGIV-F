@@ -22,7 +22,7 @@ export function ServiciosimpresionorgPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/serviciosimpresionorg-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/serviciosimpresionorg-create" size="large" startIcon={<AddCircleIcon />}>
             Nuevo servicio de impresión
         </Button>
         </Box>
@@ -44,7 +44,7 @@ export function ServiciosimpresionorgPage() {
                             <TableCell>{servicioimpresionorg.nombre_servicio_impresion_organizacion}</TableCell>
                             <TableCell>{servicioimpresionorg.valor_metro_lineal}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/serviciosimpresionorg/'+servicioimpresionorg.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/serviciosimpresionorg/'+servicioimpresionorg.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

@@ -51,7 +51,7 @@ export function ServiciosimpresionorgFormPage() {
                     },
                 });
             }
-            navigate('/serviciosimpresionorg');
+            navigate('/admin/serviciosimpresionorg');
         } catch (error) {
             console.error('Error al procesar el formulario:', error);
             setError(error); // Almacenamos el error en el estado local
@@ -105,7 +105,7 @@ export function ServiciosimpresionorgFormPage() {
 
                     {/* BOTÓN ATRÁS */}
                     <Box sx={{ display: "flex", marginBottom: '40px' }}>
-                        <Button variant='contained' color="warning" component={Link} to={'/serviciosimpresionorg/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
+                        <Button variant='contained' color="warning" component={Link} to={'/admin/serviciosimpresionorg/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
                             Atrás
                         </Button>
                     </Box>
@@ -150,7 +150,7 @@ export function ServiciosimpresionorgFormPage() {
                                             color: "#fff"
                                         }
                                     })
-                                    navigate("/serviciosimpresionorg")
+                                    navigate("/admin/serviciosimpresionorg")
                                 }
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>

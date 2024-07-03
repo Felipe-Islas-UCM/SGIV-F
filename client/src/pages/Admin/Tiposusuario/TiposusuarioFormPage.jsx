@@ -49,7 +49,7 @@ export function TiposusuarioFormPage() {
                     },
                 });
             }
-            navigate('/tiposusuario');
+            navigate('/admin/tiposusuario');
         } catch (error) {
             console.error('Error al procesar el formulario:', error);
             setError(error); // Almacenamos el error en el estado local
@@ -102,7 +102,7 @@ export function TiposusuarioFormPage() {
 
                     {/* BOTÓN ATRÁS */}
                     <Box sx={{ display: "flex", marginBottom: '40px' }}>
-                        <Button variant='contained' color="warning" component={Link} to={'/tiposusuario/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
+                        <Button variant='contained' color="warning" component={Link} to={'/admin/tiposusuario/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
                             Atrás
                         </Button>
                     </Box>
@@ -140,7 +140,7 @@ export function TiposusuarioFormPage() {
                                             color: "#fff"
                                         }
                                     })
-                                    navigate("/tiposusuario")
+                                    navigate("/admin/tiposusuario")
                                 }
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>

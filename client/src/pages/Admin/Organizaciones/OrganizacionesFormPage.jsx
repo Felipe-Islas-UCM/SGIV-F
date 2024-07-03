@@ -48,7 +48,7 @@ export function OrganizacionesFormPage() {
                     },
                 });
             }
-            navigate('/organizaciones');
+            navigate('/admin/organizaciones');
         } catch (error) {
             console.error('Error al procesar el formulario:', error);
             setError(error); // Almacenamos el error en el estado local
@@ -94,7 +94,7 @@ export function OrganizacionesFormPage() {
 
 
                     <Box sx={{ display: "flex", marginBottom: '40px' }}>
-                        <Button variant='contained' color="warning" component={Link}  to={'/organizaciones/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
+                        <Button variant='contained' color="warning" component={Link}  to={'/admin/organizaciones/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
                             Atrás
                         </Button>
                     </Box>
@@ -125,7 +125,7 @@ export function OrganizacionesFormPage() {
                                             color: "#fff"
                                         }
                                     })
-                                    navigate("/organizaciones")
+                                    navigate("/admin/organizaciones")
                                 }
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>

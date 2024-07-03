@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Link } from 'react-router-dom';
 
-export function TiposusuariosPage() {
+export function TiposusuarioPage() {
 
     const [tiposusuarios, setTiposusuarios] = useState([])
     tiposusuarios.sort((a,b) => {
@@ -22,7 +22,7 @@ export function TiposusuariosPage() {
     }, [])
     return <div>
         <Box sx={{ flexGrow: 1 }}>
-        <Button variant="contained" component={Link} to="/tiposusuario-create" size="large" startIcon={<AddCircleIcon />}>
+        <Button variant="contained" component={Link} to="/admin/tiposusuario-create" size="large" startIcon={<AddCircleIcon />}>
             Nuevo Tipo de usuario
         </Button>
         </Box>
@@ -42,7 +42,7 @@ export function TiposusuariosPage() {
                             <TableCell>{tipousuario.id}</TableCell>
                             <TableCell>{tipousuario.nombre_tipo_usuario}</TableCell>
                             <TableCell >
-                                <Button variant="contained" component={Link} to={'/tiposusuario/'+tipousuario.id}>Editar</Button>
+                                <Button variant="contained" component={Link} to={'/admin/tiposusuario/'+tipousuario.id}>Editar</Button>
                             </TableCell>
                         </TableRow>
                     ))}

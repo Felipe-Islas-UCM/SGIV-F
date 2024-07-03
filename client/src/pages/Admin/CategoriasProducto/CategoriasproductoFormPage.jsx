@@ -49,7 +49,7 @@ export function CategoriasproductoFormPage() {
                     },
                 });
             }
-            navigate('/categoriasproducto');
+            navigate('/admin/categoriasproducto');
         } catch (error) {
             console.error('Error al procesar el formulario:', error);
             setError(error); // Almacenamos el error en el estado local
@@ -103,7 +103,7 @@ export function CategoriasproductoFormPage() {
 
                     {/* BOTÓN ATRÁS */}
                     <Box sx={{ display: "flex", marginBottom: '40px' }}>
-                        <Button variant='contained' color="warning" component={Link} to={'/categoriasproducto/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
+                        <Button variant='contained' color="warning" component={Link} to={'/admin/categoriasproducto/'} startIcon={<ArrowBackIcon />} sx={{ width: '15%' }}>
                             Atrás
                         </Button>
                     </Box>
@@ -141,7 +141,7 @@ export function CategoriasproductoFormPage() {
                                             color: "#fff"
                                         }
                                     })
-                                    navigate("/categoriasproducto")
+                                    navigate("/admin/categoriasproducto")
                                 }
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>

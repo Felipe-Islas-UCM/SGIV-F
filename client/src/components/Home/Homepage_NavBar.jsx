@@ -18,10 +18,7 @@ export default function Homepage_Navbar() {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Comercial Pewen
         </Typography>
-        <Button component={Link} to="/servicios" color="inherit">Admin</Button>
-        <Button color="inherit">Nosotros</Button>
-        <Button color="inherit">Servicios</Button>
-        <Button color="inherit">Contacto</Button>
+        <Button component={Link} to="/login" color="inherit">Admin</Button>
       </Toolbar>
     </AppBar>
   );

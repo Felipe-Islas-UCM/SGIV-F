@@ -10,20 +10,18 @@ import { Navigate } from 'react-router-dom';
 export default function Homepage_Navbar() {
   return (
     <AppBar theme={theme} position="static">
-      <Toolbar>
-        <IconButton size="large" edge="start" aria-label="menu" sx={{ mr: 2 }}>
-          <MenuIcon />
-        </IconButton>
-        <img src={Logo} alt="Logo de la empresa" style={{ width: 40, marginRight: 10 }} /> {/* Agrega tu logo aquí */}
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Comercial Pewen
-        </Typography>
-        <Button component={Link} to="/login" color="inherit">Admin</Button>
-      </Toolbar>
-    </AppBar>
+  <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' , backgroundColor: '#C99C33' }}>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <img src={Logo} alt="Logo de la empresa" style={{ width: 40, marginRight: 10 }} />
+      <h2 style={{ margin: 0 }}>
+        Comercial Pewen
+      </h2>
+    </div>
+    <Button component={Link} to="/login" color="inherit">Admin</Button>
+  </Toolbar>
+  </AppBar>
   );
 }
-
 
 
 

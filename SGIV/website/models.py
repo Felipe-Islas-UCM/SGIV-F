@@ -81,6 +81,15 @@ class Producto(models.Model):
 
     def __str__(self):
         return(f"{self.nombre_producto}")
+    
+    def save(self, *args, **kwargs):
+        # Verificar el estado del stock
+        if self.stock > 0:
+            self.estado_en_stock = True
+        else:
+            self.estado_en_stock = False
+        # Llamar al método save del modelo base
+        super(Producto, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Productos"

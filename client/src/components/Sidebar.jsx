@@ -109,10 +109,10 @@ export function Sidebar ()  {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Ed Roh{/*Poner el nombre de usuario*/}
+                  Comercial Pewen{/*Poner el nombre de usuario*/}
                 </Typography>
                 <Typography variant="h5" color={'#f37e17'}>
-                  VP Fancy Admin {/*Poner el rol usuario*/}
+                  POS {/*Poner el rol usuario*/}
                 </Typography>
               </Box>
             </Box>

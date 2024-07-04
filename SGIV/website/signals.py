@@ -53,20 +53,20 @@ def post_delete_item_venta(sender, instance, **kwargs):
 
 # ------------ LÓGICA VENTA-ITEMVENTA --------------------------
 def actualizar_importe_venta(venta):
-    total_importe = sum(item.importe for item in venta.itemventa_set.all())
-    venta.importe = total_importe
+    # Calcular el nuevo importe para la venta
+    total_importe_items = sum(item.importe for item in venta.itemventa_set.all())
+    total_importe_organizacion = sum(org.importe_total for org in venta.ventaorganizacion_set.all())
+    venta.importe = total_importe_items + total_importe_organizacion
     venta.save()
 
+
 @receiver(post_save, sender=ItemVenta)
-def actualizar_importe_venta_post_save(sender, instance, **kwargs):
+def actualizar_importe_venta_itemventa_post_save(sender, instance, **kwargs):
     actualizar_importe_venta(instance.fk_cod_venta)
 
 @receiver(post_delete, sender=ItemVenta)
-def actualizar_importe_venta_post_delete(sender, instance, **kwargs):
+def actualizar_importe_venta_itemventa_post_delete(sender, instance, **kwargs):
     actualizar_importe_venta(instance.fk_cod_venta)
-
-
-
 
 
 # ------------ LÓGICA ITEMVENTAORG-SERVICIOIMPRESION --------------------------
@@ -84,25 +84,25 @@ def pre_save_item_venta_org(sender, instance, **kwargs):
 
 
 # ------------ LÓGICA VENTAORG-ITEMVENTAORG --------------------------
-def actualizar_importe_venta(ventaorg):
+def actualizar_importe_ventaorg(ventaorg):
     total_importe = sum(item.importe_item_venta_organizacion for item in ventaorg.itemventaorganizacion_set.all())
     ventaorg.importe_total = total_importe
     ventaorg.save()
 
 @receiver(post_save, sender=ItemVentaOrganizacion)
 def actualizar_importe_venta_post_save(sender, instance, **kwargs):
-    actualizar_importe_venta(instance.fk_venta_organizacion)
+    actualizar_importe_ventaorg(instance.fk_venta_organizacion)
 
 @receiver(post_delete, sender=ItemVentaOrganizacion)
 def actualizar_importe_venta_post_delete(sender, instance, **kwargs):
-    actualizar_importe_venta(instance.fk_venta_organizacion)
+    actualizar_importe_ventaorg(instance.fk_venta_organizacion)
 
 
 
 # ------------ LÓGICA VENTAORG-VENTA --------------------------
 
 @receiver(post_save, sender=VentaOrganizacion)
-def actualizar_importe_venta(sender, instance, **kwargs):
+def actualizar_importe_venta_org(sender, instance, **kwargs):
     venta = instance.fk_cod_venta
     venta.importe = instance.importe_total
     venta.save()

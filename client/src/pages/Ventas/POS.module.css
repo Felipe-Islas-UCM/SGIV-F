@@ -1,0 +1,34 @@
+.container {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 1.4fr 0.6fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "Items-de-Venta Items-de-Venta Checkout"
+    "Categorias-Productos Productos Productos"; 
+  height: 100vh;
+}
+
+.Productos { 
+  grid-area: Productos;
+  overflow-y: auto;
+}
+
+.Categorias-Productos { 
+  grid-area: Categorias-Productos;
+  overflow-y: auto;
+}
+
+.Items-de-Venta { 
+  grid-area: Items-de-Venta;
+}
+
+.Checkout { 
+  grid-area: Checkout;
+}
+
+.categoriasGrid, .productosGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}

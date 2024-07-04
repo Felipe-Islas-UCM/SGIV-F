@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'django_filters',
     "rest_framework",
+    "rest_framework.authtoken",
     "coreapi",
     "website"
 ]
@@ -84,7 +85,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "comercialpewenfinal",
         "USER": "root",
-        "PASSWORD": "iluminarTudia1$",
+        "PASSWORD": "juako2109",
         "HOST": "localhost",
         "PORT": "3306"
     }
@@ -136,7 +137,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = ["http://localhost:5173"] #Para poder decirle al navegador que tanto el localhost:8000 como el localhost:5173 tienen permisos para pedir
                             #a la API
 
+
+
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
+
+AUTHENTICATION_BACKENDS = [
+    'website.authentication.CustomAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+AUTH_USER_MODEL = 'website.usuario'

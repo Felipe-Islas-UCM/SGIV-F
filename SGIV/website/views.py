@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.authtoken.models import Token
 from django.contrib import messages #para mostar mensajes popup cuando se logre hacer un login exitoso, entre otras cosas
 from rest_framework import viewsets, status
 from rest_framework.response import Response
@@ -91,8 +94,15 @@ class VentaOrganizacionView(viewsets.ModelViewSet):
 
 
 
-
-
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user:
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
+        return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 

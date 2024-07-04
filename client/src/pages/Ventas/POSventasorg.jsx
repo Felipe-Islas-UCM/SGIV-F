@@ -200,7 +200,7 @@ export function POSventasorg() {
           >
             <MenuItem value="" disabled>Usuario</MenuItem>
             {usuarios.map((user) => (
-              <MenuItem key={user.id} value={user.id}>{user.nombre_usuario}</MenuItem>
+              <MenuItem key={user.id} value={user.id}>{user.nombre_usuario+" ("+ user.tipo_usuario.nombre_tipo_usuario + ") "}</MenuItem>
             ))}
           </Select>
         </Grid>

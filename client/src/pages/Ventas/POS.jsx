@@ -12,6 +12,7 @@ import { createItemventa } from '../../api/itemsventa';
 import { getAllServicios } from "../../api/servicios.api";
 import { getAllUsuarios } from "../../api/usuarios.api";
 import { getAllMetodosPago } from "../../api/metodospago.api";
+import toast from 'react-hot-toast';
 
 
 export function POS() {
@@ -138,6 +139,7 @@ export function POS() {
 
   const confirmCheckout = async () => {
     setIsProcessing(true);
+    const checkoutPromise = new Promise(async (resolve, reject) => {
     try {
       // Create the sale
       const saleData = {
@@ -181,16 +183,33 @@ export function POS() {
       setSelectedMetodoPago('');
       setOpenConfirmDialog(false);
   
-      // Inform the user
-      alert('¡Gracias por su compra!');
-  
+      resolve();
     } catch (error) {
       console.error('Error during checkout:', error);
-      alert(`Hubo un error al procesar su compra: ${error.message}. Por favor, inténtelo de nuevo.`);
+      reject(error);
     } finally {
       setIsProcessing(false);
     }
-  };
+  });
+
+  toast.promise(
+    checkoutPromise,
+    {
+      loading: 'Procesando su compra...',
+      success: '¡Gracias por su compra!',
+      error: (err) => `Error al procesar su compra: ${err.message}`,
+    },
+    {
+      style: {
+        minWidth: '250px',
+      },
+      success: {
+        duration: 3000,
+        icon: '🎉',
+      },
+    }
+  );
+};
 
   if (loading) {
     return <CircularProgress />;
@@ -295,7 +314,7 @@ export function POS() {
               >
                 {usuarios.map((usuario) => (
                   <MenuItem key={usuario.id} value={usuario.id}>
-                    {usuario.nombre_usuario}
+                    {usuario.nombre_usuario+" ("+ usuario.tipo_usuario.nombre_tipo_usuario + ") "}
                   </MenuItem>
                 ))}
               </Select>

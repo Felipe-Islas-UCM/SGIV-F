@@ -3,6 +3,7 @@ from django.db import models
 
 from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 solo_letras_validator = RegexValidator( #Se crea la instancia RagexValidator importada de la libreria
     regex='^[A-Za-z ]+$', #Contiene la expresion utilizada para validar la cadena, en este caso que se solo se admitan mayusculas, minusculas y espacios en blanco
@@ -116,17 +117,47 @@ class TipoUsuario(models.Model):
         verbose_name_plural = "TiposUsuarios"
 
 
-class Usuario(models.Model):
-    nombre_usuario = models.CharField(unique=True,max_length=50,blank=False,null=False) 
-    contrasena_usuario = models.CharField(max_length=50,blank=False,null=False) 
-    fk_tipo_usuario = models.ForeignKey(TipoUsuario, models.DO_NOTHING) 
+#Es un administrador personalizado para el modelo Usuario.
+class UsuarioManager(BaseUserManager):
+    #Crea y guarda un usuario en la base de datos
+    def create_user(self, nombre_usuario, contrasena_usuario, fk_tipo_usuario, is_active=True, password=None):
+        if not nombre_usuario:
+            raise ValueError('El usuario debe tener un nombre de usuario')
+        
+        user = self.model(
+            nombre_usuario=nombre_usuario,
+            fk_tipo_usuario=fk_tipo_usuario,
+            is_active=is_active,
+        )
+        user.set_password(contrasena_usuario if contrasena_usuario else password) #Encripta y guarda la contraaseña del usuario
+        user.save(using=self._db) #guarda al usuario en la BD
+        return user #retorna el usuario creaado
+
+class Usuario(AbstractBaseUser): #Define un sistema de autenticacion personalizado
+    nombre_usuario = models.CharField(unique=True, max_length=50, blank=False, null=False)
+    contrasena_usuario = models.CharField(max_length=128, blank=False, null=False)
+    fk_tipo_usuario = models.ForeignKey('TipoUsuario', on_delete=models.DO_NOTHING)
+    is_active = models.BooleanField(default=True) #indica si la cuenta del usuario esta activa
+    last_login = models.DateTimeField(null=True, blank=True) 
+    
+    objects = UsuarioManager()  
+
+    USERNAME_FIELD = 'nombre_usuario' #Especifica que el campo utilizado para el inicio de sesión
+    REQUIRED_FIELDS = ['fk_tipo_usuario', 'contrasena_usuario'] #Lista de campos requeridos al crear un usuario mediante el administrador.
 
     def __str__(self):
-        return(f"{self.nombre_usuario}")
+        return self.nombre_usuario
+
+    def set_password(self, raw_password):
+        self.contrasena_usuario = make_password(raw_password)
+        self._password = raw_password
+
+    def check_password(self, raw_password):
+        return self.contrasena_usuario == raw_password
 
     class Meta:
+        db_table = 'website_usuarios'
         verbose_name_plural = "Usuarios"
-
 
 
 

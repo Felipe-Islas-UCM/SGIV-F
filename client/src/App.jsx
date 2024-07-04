@@ -7,29 +7,30 @@ import { Dashboard } from "./components/Dashboard";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from './pages/Login/LoginPage';
 import { Toaster } from "react-hot-toast";
-
-
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
-  
   const queryClient = new QueryClient();
   return (
-    
-        <div className='App'>
-          <QueryClientProvider client={queryClient}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/home" />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/admin/*" element={<Dashboard />} />
-              <Route path="/home" element={<HomePage />} />
-            </Routes>
-            <Toaster />
-            <ReactQueryDevtools />
-          </QueryClientProvider>
-        </div>
-      
+    <div className='App'>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin/*" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/home" element={<HomePage />} />
+        </Routes>
+        <Toaster />
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </div>
   );
 }
+
 export default App;
 
 

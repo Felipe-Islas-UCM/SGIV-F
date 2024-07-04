@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.documentation import include_docs_urls
 from rest_framework import routers
 from . import views
-
+from .views import LoginView
 
 router = routers.DefaultRouter()
 router.register(r'categoriasimpuesto',views.CategoriaImpuestoView, 'categoriasimpuesto')
@@ -36,5 +36,6 @@ urlpatterns = [
     path('delete_service/<int:pk>',views.delete_servicio,name='delete_service'),
     path('update_service/<int:pk>',views.update_servicio,name='update_service'),
     path('add_service/',views.add_servicio,name='add_service'),
+    path('api/login/', LoginView.as_view(), name='api_login'),
     #####################################################################################################################
 ]

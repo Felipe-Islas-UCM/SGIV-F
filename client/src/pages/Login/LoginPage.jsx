@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styles from './LoginPage.module.css';
+import styles from './LoginPage.module.css'; 
 import Logo from './comercial_pewen.png';
 
 export function LoginPage() {
-    const navigate = useNavigate();
-    const [username, setUsername] = useState('');
+    const navigate = useNavigate(); //Para la navegacion programatica 
+    const [username, setUsername] = useState(''); // Estado para almacenar el nombre de usuario y contraseña
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState(''); //Manejar mensaje de error
 
+    //Funcion para manejar el evento de inicio de sesion
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
@@ -17,10 +18,10 @@ export function LoginPage() {
                 username,
                 password
             });
-            localStorage.setItem('token', response.data.token);
-            navigate('/admin');
+            localStorage.setItem('token', response.data.token); // Almacena el token de autenticacion devuelto por el servidor en el localStorage
+            navigate('/admin'); // Navega a la ruta despues de inicio de sesion exitoso
         } catch (error) {
-            setError('Credenciales inválidas');
+            setError('Credenciales inválidas'); // Captura el error que puede ocurrir durante la peticion
         }
     };
 

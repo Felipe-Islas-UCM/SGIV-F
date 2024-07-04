@@ -95,14 +95,14 @@ class VentaOrganizacionView(viewsets.ModelViewSet):
 
 
 class LoginView(APIView):
-    def post(self, request):
+    def post(self, request): #Obtiene nombre y contraseña del cuerpo de la request data 
         username = request.data.get('username')
         password = request.data.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user:
-            token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key}, status=status.HTTP_200_OK)
-        return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_400_BAD_REQUEST)
+        user = authenticate(request, username=username, password=password) #autentica al usuario con sus credentiales
+        if user: #verifica si la autenticacion fue exitosa 
+            token, created = Token.objects.get_or_create(user=user) #Si el user es autenticado genera un token de autenticacion o lo obtiene si ya existe
+            return Response({'token': token.key}, status=status.HTTP_200_OK) #devuelve una respuesta con el token generado
+        return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_400_BAD_REQUEST) #Si falla devuelve mensaje de error
 
 
 

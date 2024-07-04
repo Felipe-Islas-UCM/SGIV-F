@@ -11,6 +11,7 @@ import ServicioImpresiones from './components/ServicioImpresiones';
 import ServicioProductosIdeal from './components/ServicioProductos-Ideal';
 import ServicioPellet from './components/ServicioPellet';
 import ServicioPublicidad from './components/ServicioPublicidad';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 
 
@@ -18,24 +19,38 @@ import ServicioPublicidad from './components/ServicioPublicidad';
 function App() {
   const queryClient = new QueryClient();
   return (
-    
-        <div className='App'>
-          <QueryClientProvider client={queryClient}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/home" />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/admin/*" element={<Dashboard />} />
-              <Route path="/home" element={<HomePage />} />
-              <Route path="/impresiones" element={<ServicioImpresiones/>} />
-              <Route path="/productos-ideal" element={<ServicioProductosIdeal/>} />
-              <Route path="/pellet" element={<ServicioPellet/>} />
-              <Route path="/publicidad" element={<ServicioPublicidad/>} />
-            </Routes>
-            <Toaster />
-            <ReactQueryDevtools />
-          </QueryClientProvider>
-        </div>
-      
+
+    <div className='App'>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin/*" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/impresiones" element={<ServicioImpresiones />} />
+          <Route path="/productos-ideal" element={<ServicioProductosIdeal />} />
+          <Route path="/pellet" element={<ServicioPellet />} />
+          <Route path="/publicidad" element={<ServicioPublicidad />} />
+        </Routes>
+        <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            fontFamily: 'Poppins',
+            background: '#363636',
+            color: '#fff',
+          },
+        }}
+      />
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </div>
+
   );
 }
 

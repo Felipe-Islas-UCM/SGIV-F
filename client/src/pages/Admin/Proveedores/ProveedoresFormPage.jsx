@@ -149,6 +149,7 @@ export function ProveedoresFormPage() {
                                     })
                                     navigate("/admin/proveedores")
                                 }
+                                
                             }}
                                 variant="contained" color="error" sx={{ width: '27%' }}>
                                 Borrar

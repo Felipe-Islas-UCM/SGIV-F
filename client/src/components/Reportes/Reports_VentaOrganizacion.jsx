@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { getAllVentas } from "../../api/ventas.api";
+import { getAllVentasorg } from "../../api/ventasorganizacion.api";
 import { getAllOrganizaciones } from "../../api/organizaciones.api";
+import { getAllVentas } from "../../api/ventas.api";
 import { PieChart } from 'react-minimal-pie-chart';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Papa from 'papaparse';
-import { parseISO, format } from 'date-fns';
+import { parseISO, isValid } from 'date-fns';
 
 export function Reports_VentaOrganizacion() {
-  const [ventas, setVentas] = useState([]);
+  const [ventasOrganizacion, setVentasOrganizacion] = useState([]);
   const [organizaciones, setOrganizaciones] = useState([]);
+  const [ventas, setVentas] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [ventasPorOrganizacion, setVentasPorOrganizacion] = useState([]);
+  const [ventasFiltradas, setVentasFiltradas] = useState([]);
 
   useEffect(() => {
     async function loadData() {
       try {
-        const ventasRes = await getAllVentas();
-        setVentas(ventasRes.data);
+        const [ventasOrganizacionRes, organizacionesRes, ventasRes] = await Promise.all([
+          getAllVentasorg(),
+          getAllOrganizaciones(),
+          getAllVentas()
+        ]);
 
-        const organizacionesRes = await getAllOrganizaciones();
+        setVentasOrganizacion(ventasOrganizacionRes.data);
         setOrganizaciones(organizacionesRes.data);
+        setVentas(ventasRes.data);
       } catch (error) {
         console.error('Error al cargar datos:', error);
       }
@@ -34,39 +40,41 @@ export function Reports_VentaOrganizacion() {
 
   useEffect(() => {
     filtrarVentasPorFecha();
-  }, [startDate, endDate]);
+  }, [startDate, endDate, ventasOrganizacion, ventas]);
 
   const filtrarVentasPorFecha = () => {
-    const ventasFiltradas = ventas.filter((venta) => {
+    const ventasFiltradas = ventasOrganizacion.filter((ventaOrg) => {
+      const venta = ventas.find(v => v.id === ventaOrg.fk_cod_venta);
+      if (!venta || !venta.fecha_venta) {
+        console.warn('Venta sin fecha:', ventaOrg);
+        return false;
+      }
+
       const fechaVenta = parseISO(venta.fecha_venta);
+      if (!isValid(fechaVenta)) {
+        console.warn('Fecha de venta inválida:', venta.fecha_venta);
+        return false;
+      }
+
       return (
         (startDate === null || fechaVenta >= startDate) &&
         (endDate === null || fechaVenta <= endDate)
       );
     });
 
-    // Lógica adicional según tus necesidades...
-    // Puedes actualizar el estado de ventasPorOrganizacion con los resultados del filtro
-    setVentasPorOrganizacion(ventasFiltradas);
+    setVentasFiltradas(ventasFiltradas);
   };
 
-  // Mapear identificadores de organizaciones a nombres
   const organizacionesNombres = organizaciones.reduce((acc, organizacion) => {
     acc[organizacion.id] = organizacion.nombre_organizacion;
     return acc;
   }, {});
 
-  // Calcular el dinero recaudado por cada organización
-  const ventasCalculadas = ventasPorOrganizacion.reduce((acc, venta) => {
-    const organizacionId = venta.fk_ventas_organizacion;
-    const importe = venta.importe;
+  const ventasCalculadas = ventasFiltradas.reduce((acc, venta) => {
+    const organizacionId = venta.fk_organizacion;
+    const importe = venta.importe_total;
 
-    let nombreOrganizacion;
-    if (!organizacionesNombres[organizacionId]) {
-      nombreOrganizacion = 'Cliente sin organización';
-    } else {
-      nombreOrganizacion = organizacionesNombres[organizacionId];
-    }
+    const nombreOrganizacion = organizacionesNombres[organizacionId] || 'Organización desconocida';
 
     if (!acc[organizacionId]) {
       acc[organizacionId] = { nombre: nombreOrganizacion, total: 0, color: getRandomColor() };
@@ -76,25 +84,19 @@ export function Reports_VentaOrganizacion() {
     return acc;
   }, {});
 
-  // Preparar datos para el gráfico de pastel
-  const pieChartData = Object.entries(ventasCalculadas).map(([organizacionId, { nombre, total }]) => ({
-    title: `${nombre} (${organizacionId})`,
+  const pieChartData = Object.values(ventasCalculadas).map(({ nombre, total, color }) => ({
+    title: nombre,
     value: total,
-    color: getRandomColor(),
+    color: color,
   }));
 
   function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+    return '#' + Math.floor(Math.random()*16777215).toString(16);
   }
 
   const downloadCSV = () => {
-    const csvData = Object.entries(ventasCalculadas).map(([organizacionId, { nombre, total }]) => [nombre, total]);
-    csvData.unshift(['Organización', 'Total Recaudado']); // Agregar encabezados
+    const csvData = Object.values(ventasCalculadas).map(({ nombre, total }) => [nombre, total]);
+    csvData.unshift(['Organización', 'Total Recaudado']);
 
     const csv = Papa.unparse(csvData);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -120,11 +122,9 @@ export function Reports_VentaOrganizacion() {
       </Box>
       <br />
 
-      {/* Informe de ventas por organización */}
       <Box mt={4}>
         <h2>Informe de Ventas por Organización</h2>
 
-        {/* Selección de fechas */}
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
@@ -141,12 +141,23 @@ export function Reports_VentaOrganizacion() {
           Filtrar por fechas
         </Button>
 
-        {/* Gráfico de pastel */}
-        <div style={{ width: '50%', margin: 'auto' }}>
-          <PieChart data={pieChartData} />
-        </div>
+        {pieChartData.length > 0 ? (
+          <div style={{ width: '50%', margin: 'auto', marginTop: '20px', marginBottom: '20px' }}>
+            <PieChart
+              data={pieChartData}
+              label={({ dataEntry }) => `${dataEntry.title}: ${Math.round(dataEntry.percentage)}%`}
+              labelStyle={{
+                fontSize: '5px',
+                fontFamily: 'sans-serif',
+              }}
+              radius={42}
+              labelPosition={112}
+            />
+          </div>
+        ) : (
+          <p>No hay datos para mostrar en el gráfico.</p>
+        )}
 
-        {/* Lista de organizaciones y total recaudado */}
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -157,7 +168,7 @@ export function Reports_VentaOrganizacion() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Object.entries(ventasCalculadas).map(([organizacionId, { nombre, total, color }], index) => (
+              {Object.values(ventasCalculadas).map(({ nombre, total, color }, index) => (
                 <TableRow key={index}>
                   <TableCell>{nombre}</TableCell>
                   <TableCell align="right">{total}</TableCell>
@@ -170,7 +181,6 @@ export function Reports_VentaOrganizacion() {
           </Table>
         </TableContainer>
 
-        {/* Botón para descargar CSV */}
         <Button onClick={downloadCSV} variant="contained" color="primary" style={{ marginTop: '16px' }}>
           Descargar CSV
         </Button>

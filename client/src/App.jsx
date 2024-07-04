@@ -16,7 +16,6 @@ import ServicioPublicidad from './components/ServicioPublicidad';
 
 
 function App() {
-  
   const queryClient = new QueryClient();
   return (
     
@@ -39,6 +38,7 @@ function App() {
       
   );
 }
+
 export default App;
 
 
